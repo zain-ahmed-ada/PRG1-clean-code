@@ -1,34 +1,39 @@
-let tList = []; 
+let taskList = [];
 
-function x1(tName, tDue) {
-  let t = { n: tName, d: tDue, c: false };
-  tList.push(t);
+function addTask(taskName, taskDue) {
+	let task = {
+		name: taskName,
+		due: taskDue,
+		condition: false,
+	};
+
+	taskList.push(task);
 }
 
-function x2(tName) {
-  tList = tList.filter(t => t.n !== tName);
+function removeTask(taskName) {
+	taskList = taskList.filter((task) => task.name !== taskName);
 }
 
-function x3() {
-  console.log("All Tasks:");
-  tList.forEach(t => {
-    console.log(`Task: ${t.n}, Due: ${t.d}, Completed: ${t.c}`);
-  });
+function printTasks() {
+	console.log("All Tasks:");
+	taskList.forEach((task) => {
+		console.log(`Task: ${task.name}, Due: ${task.due}, Completed: ${task.condition}`);
+	});
 }
 
-function x4(tName) {
-  let tIndex = tList.findIndex(t => t.n === tName);
-  if (tIndex !== -1) {
-    tList[tIndex].c = true;
-  } else {
-    console.log("Task not found.");
-  }
+function completedTask(taskName) {
+	let taskIndex = taskList.findIndex((task) => task.name === taskName);
+	if (taskIndex !== -1) {
+		taskList[taskIndex].condition = true;
+	} else {
+		console.log("Task not found.");
+	}
 }
 
-
-x1("Fix bug in code", "2024-02-21");
-x1("Update documentation", "2024-02-22");
-x3();
-x4("Fix bug in code");
-x2("Update documentation");
-x3();
+addTask("Fix bug in code", "2024-02-21");
+addTask("Update documentation", "2024-02-22");
+printTasks();
+console.log("");
+completedTask("Fix bug in code");
+removeTask("Update documentation");
+printTasks();
